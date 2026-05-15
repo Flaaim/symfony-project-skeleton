@@ -32,6 +32,8 @@ services:
       dockerfile: development/php-fpm/Dockerfile
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      PHP_IDE_CONFIG: serverName=API
     volumes:
       - ./api:/app
 
