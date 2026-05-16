@@ -1,4 +1,4 @@
-init: docker-down-clear docker-pull docker-build docker-up
+init: docker-down-clear api-clear docker-pull docker-build docker-up
 up: docker-up
 down: docker-down
 restart: down up
@@ -19,6 +19,9 @@ docker-down-clear:
 
 docker-pull:
 	docker compose pull
+
+api-clear:
+	docker run --rm -v ${PWD}/api:/app -w /app alpine sh -c 'rm -rf var/*'
 
 docker-build:
 	docker compose build
