@@ -5,6 +5,8 @@ restart: down up
 check: lint analyze
 lint: api-lint
 analyze: api-analyze
+test: api-test
+api-test: unit-test functional-test
 
 docker-up:
 	docker compose up -d
@@ -35,6 +37,12 @@ app-cs-fix:
 
 api-analyze:
 	docker compose run --rm api-php-cli composer psalm
+
+unit-test:
+	docker compose run --rm api-php-cli composer test -- --testsuite=Unit
+
+functional-test:
+	docker compose run --rm api-php-cli composer test -- --testsuite=Functional
 
 build: build-gateway build-frontend build-api
 
